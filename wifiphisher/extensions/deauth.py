@@ -200,7 +200,7 @@ class Deauth(object):
         :type self: Deauth
         :param bssid: Address of the bssid
         :type new_channel: str
-        :type old_channel: str 
+        :type old_channel: str
         :type bssid: str
         :return: None
         :rtype: None
@@ -279,3 +279,13 @@ class Deauth(object):
                 and not self._data.args.channel_monitor:
             return [self._data.target_ap_channel]
         return map(str, constants.ALL_2G_CHANNELS)
+
+    def on_exit(self):
+        """
+        Free all the resources regarding to this module
+        :param self: A Deauth object
+        :type self: Deauth
+        :return: None
+        :rtype: None
+        """
+        pass

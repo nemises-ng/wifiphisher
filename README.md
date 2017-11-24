@@ -116,6 +116,7 @@ Following are all the options along with their descriptions (also available with
 |-cM|--channel-monitor|Monitor if the target access point changes the channel.|
 ||--payload-path| Enable the payload path. Intended for use with scenarios that serve payloads.|
 |-wE|--wpspbc-exploit|Monitor if the wps pbc button is being pressed.|
+|-wAI|--wpspbc-assoc-interface|The wlan interface used for associating to the WPS AccessPoint.|
 
 
 ## Screenshots

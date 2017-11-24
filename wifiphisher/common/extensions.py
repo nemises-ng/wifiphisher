@@ -56,6 +56,9 @@ class ExtensionManager(object):
     * send_output(self): Method that returns in a list
       of strings the entry logs that we need to output.
 
+    * on_exit(self): Method that frees the resources using by
+      the specific extension module
+
     * each extension can define the backend method as follows:
       ex:
 
@@ -270,6 +273,9 @@ class ExtensionManager(object):
             self._socket.close()
         except AttributeError:
             pass
+        # clean the wps resource when exist
+        for extension in self._extensions:
+            extension.on_exit()
 
     def get_channels(self):
         """

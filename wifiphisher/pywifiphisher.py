@@ -144,6 +144,9 @@ def parse_args():
     parser.add_argument("-wE", "--wpspbc-exploit",
                         help="Monitor if the wps pbc button is being pressed.",
                         action="store_true")
+    parser.add_argument("-wAI", "--wpspbc-assoc-interface",
+                        help="The wlan interface used for associating to the WPS AccessPoint.",
+                        )
 
     return parser.parse_args()
 
@@ -305,6 +308,12 @@ class WifiphisherEngine:
                         self.network_manager.unblock_interface(internet_interface)
                 logger.info("Selecting %s interface for accessing internet",
                             args.internetinterface)
+            # check if the interface for WPS is valid
+            if self.opmode.wps_assoc_enabled():
+                if self.network_manager.is_interface_valid(
+                        args.wpspbc_assoc_interface, "WPS"):
+                    logger.info("Selecting %s interface for wps association",
+                                args.wpspbc_assoc_interface)
             if self.opmode.advanced_enabled():
                 if args.jamminginterface and args.apinterface:
                     if self.network_manager.is_interface_valid(
