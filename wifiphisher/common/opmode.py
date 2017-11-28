@@ -154,8 +154,7 @@ class OpMode(object):
                 constants.R +
                 '!' +
                 constants.W +
-                '] --wpspbc-exploit (-wE) and --wpspbc-assoc-interface (-wAI)'
-                'are used in conjuction.')
+                '] --wpspbc-assoc-interface (-wAI) requires --wpspbc-exploit (-wE) option.')
 
 
     def set_opmode(self, args, network_manager):
@@ -195,10 +194,10 @@ class OpMode(object):
           i) AP, ii) Extensions, iii) Internet
         7) Advanced and WPS association 0x7
           3 cards, 3 interfaces
-          i) AP, ii) Extensions, iii) WPS association
+          i) AP, ii) Extensions (Monitor), iii) Extensions (Managed)
         8) Advanced and WPS association w/ 1 vif support AP/Monitor 0x8
           2 cards, 3 interfaces
-          i) AP, ii) Extensions, iii) WPS association
+          i) AP, ii) Extensions (Monitor), iii) Extensions (Managed)
         """
 
         if not args.internetinterface and not args.nojamming:
@@ -294,13 +293,14 @@ class OpMode(object):
         """
 
         return self.op_mode in [constants.OP_MODE1,
-                                constants.OP_MODE2]
+                                constants.OP_MODE2,
+                                constants.OP_MODE7]
 
-    def wps_assoc_enabled(self):
+    def assoc_enabled(self):
         """
         :param self: An OpMode object
         :type self: OpMode
-        :return: True if we define the wps associating interface
+        :return: True if we are using managed Extensions(that associate to WLANs)
         :rtype: bool
         """
         return self.op_mode in [constants.OP_MODE7,
